@@ -1,5 +1,4 @@
-```markdown
-# myPomodoro
+# myPomodoro 🍅
 
 myPomodoro è un'applicazione semplice e intuitiva che utilizza la tecnica del Pomodoro per aiutarti a gestire meglio il tuo tempo. Con questa app, puoi migliorare la tua produttività, concentrarti sulle attività e ridurre le distrazioni.
 
@@ -64,8 +63,4 @@ Se desideri contribuire a myPomodoro, segui questi passi:
 
 Questo progetto è sotto la licenza MIT. Vedi il file [LICENSE](LICENSE) per maggiori dettagli.
 
-
----
-
 Grazie per aver scelto myPomodoro! Buon lavoro!
-```
