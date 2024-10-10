@@ -1,4 +1,3 @@
-Ecco un esempio di README per il tuo progetto **myPomodoro** su GitHub. Puoi personalizzarlo ulteriormente secondo le tue esigenze.
 
 ```markdown
 # myPomodoro
