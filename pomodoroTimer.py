@@ -9,11 +9,10 @@ class PomodoroTimer:
         self.root.geometry("500x600")
         self.root.resizable(False, False)
 
-        # Imposta modalità scura e tema blu
-        ctk.set_appearance_mode("dark")  # Modalità scura
-        ctk.set_default_color_theme("blue")  # Tema blu moderno
+        ctk.set_appearance_mode("dark")  # Modalità scura predefinita
+        ctk.set_default_color_theme("blue")  # Tema blu
 
-        # Inizializzazione delle variabili
+        # Variabili del timer
         self.pomodoro_duration = 25 * 60
         self.break_duration = 5 * 60
         self.cycles = 3
@@ -25,43 +24,56 @@ class PomodoroTimer:
         self.setup_ui()
         self.setup_audio()
 
+    # Imposta il colore di sfondo del Canvas a seconda del tema (light/dark)
+    def get_current_bg_color(self):
+        if ctk.get_appearance_mode() == "Dark":
+            return "gray17"  # colore del tema scuro
+        else:
+            return "gray86"  # colore del tema chiaro
+
     def setup_ui(self):
-        # Frame principale con un design minimale e moderno
+        # Frame principale
         self.main_frame = ctk.CTkFrame(self.root, corner_radius=20)
         self.main_frame.pack(fill="both", expand=True, padx=20, pady=20)
 
-        # Visualizzazione cicli con font moderno e dimensioni ridotte
+        # Visualizzazione cicli
         self.cycles_label = ctk.CTkLabel(self.main_frame, text=f"Ciclo: 1/{self.cycles}",
                                          font=("Helvetica", 16, "bold"))
         self.cycles_label.pack(anchor="ne", padx=10, pady=10)
 
-        # Canvas per il cerchio del timer
-        self.canvas = ctk.CTkCanvas(self.main_frame, width=300, height=300, bg="black", highlightthickness=0)
+        # Canvas per il cerchio
+        self.canvas = ctk.CTkCanvas(self.main_frame, width=300, height=300, bg=self.get_current_bg_color(), highlightthickness=0)
         self.canvas.pack(pady=20)
 
-        # Timer display con un font più grande e moderno
-        self.time_left = ctk.StringVar(value=self.format_time(self.pomodoro_duration))
-        self.timer_label = ctk.CTkLabel(self.canvas, textvariable=self.time_left, font=("Helvetica", 48, "bold"))
-        self.canvas.create_window(150, 150, window=self.timer_label)
 
-        # Pulsanti con bordi arrotondati e distanziati
+        # Timer al centro del cerchio
+        self.time_left = ctk.StringVar(value=self.format_time(self.pomodoro_duration))
+        self.timer_label = ctk.CTkLabel(self.main_frame, textvariable=self.time_left, font=("Helvetica", 48, "bold"))
+        self.canvas.create_window(150, 150, window=self.timer_label)  # Posiziona il timer al centro del cerchio
+        
+# Pulsanti principali in alto
         self.button_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
         self.button_frame.pack(pady=20)
 
         # Pulsante Avvia
         self.start_button = ctk.CTkButton(self.button_frame, text="Avvia", command=self.start_timer,
-                                          corner_radius=15, width=100, height=50)
+                                           corner_radius=15, width=120, height=50)
         self.start_button.pack(side="left", padx=10)
 
         # Pulsante Ferma
         self.stop_button = ctk.CTkButton(self.button_frame, text="Ferma", command=self.stop_timer, state="disabled",
-                                         corner_radius=15, width=100, height=50)
+                                          corner_radius=15, width=120, height=50)
         self.stop_button.pack(side="left", padx=10)
 
-        # Pulsante Impostazioni
-        self.settings_button = ctk.CTkButton(self.button_frame, text="Impostazioni", command=self.open_settings,
-                                             corner_radius=15, width=100, height=50)
-        self.settings_button.pack(side="left", padx=10)
+        # Pulsante Reset
+        self.reset_button = ctk.CTkButton(self.button_frame, text="Reset", command=self.reset_timer,
+                                           corner_radius=15, width=120, height=50)
+        self.reset_button.pack(side="left", padx=10)
+
+        # Pulsante Impostazioni in basso a destra
+        self.settings_button = ctk.CTkButton(self.main_frame, text="⚙️", command=self.open_settings,
+                                              corner_radius=15, width=50, height=50)
+        self.settings_button.place(relx=0.9, rely=0.9, anchor="center")  # Posiziona in basso a destra
 
         # Disegna il cerchio iniziale
         self.draw_circle(1)
@@ -86,6 +98,12 @@ class PomodoroTimer:
         self.stop_button.configure(state="disabled")
         self.settings_button.configure(state="normal")
 
+    def reset_timer(self):
+        self.stop_timer()
+        self.current_time = self.pomodoro_duration
+        self.time_left.set(self.format_time(self.current_time))
+        self.draw_circle(1)
+
     def countdown(self):
         if self.current_time > 0 and self.running:
             self.current_time -= 1
@@ -108,12 +126,10 @@ class PomodoroTimer:
             self.countdown()
 
     def draw_circle(self, percentage):
-        # Rende il cerchio più sottile e moderno
         self.canvas.delete("circle")
         x, y = 150, 150  # Centro del canvas
         r = 140  # Raggio del cerchio
         angle = 360 * percentage
-        # Colore più delicato e sottile
         self.canvas.create_arc(x-r, y-r, x+r, y+r, start=90, extent=-angle, outline="lightblue",
                                width=8, tags="circle", style="arc")
 
@@ -127,7 +143,8 @@ class PomodoroTimer:
     def open_settings(self):
         settings_window = ctk.CTkToplevel(self.root)
         settings_window.title("Impostazioni")
-        settings_window.geometry("300x250")
+        settings_window.geometry("350x300")
+        settings_window.grab_set()  # Mantiene la finestra in primo piano
 
         ctk.CTkLabel(settings_window, text="Durata Pomodoro (minuti):").pack(pady=5)
         pomodoro_entry = ctk.CTkEntry(settings_window)
@@ -144,6 +161,10 @@ class PomodoroTimer:
         cycles_entry.insert(0, str(self.cycles))
         cycles_entry.pack()
 
+        theme_label = ctk.CTkLabel(settings_window, text="Tema:").pack(pady=5)
+        theme_menu = ctk.CTkOptionMenu(settings_window, values=["Light", "Dark"], command=self.change_theme)
+        theme_menu.pack()
+
         def save_settings():
             self.pomodoro_duration = int(pomodoro_entry.get()) * 60
             self.break_duration = int(break_entry.get()) * 60
@@ -154,7 +175,10 @@ class PomodoroTimer:
             self.draw_circle(1)
             settings_window.destroy()
 
-        ctk.CTkButton(settings_window, text="Salva", command=save_settings).pack(pady=20)
+        ctk.CTkButton(settings_window, text="Salva", command=save_settings, width=100, height=40).pack(pady=20)
+
+    def change_theme(self, choice):
+        ctk.set_appearance_mode(choice.lower())
 
     @staticmethod
     def format_time(seconds):
