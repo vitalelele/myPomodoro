@@ -1,41 +1,56 @@
 # myPomodoro 🍅
 
-myPomodoro è un'applicazione semplice e intuitiva che utilizza la tecnica del Pomodoro per aiutarti a gestire meglio il tuo tempo. Con questa app, puoi migliorare la tua produttività, concentrarti sulle attività e ridurre le distrazioni.
+myPomodoro è un'applicazione desktop sviluppata in Python che utilizza la tecnica del Pomodoro per aiutarti a migliorare la tua produttività. Con un'interfaccia utente semplice e intuitiva, puoi gestire facilmente le tue sessioni di lavoro e le pause.
 
 ## Caratteristiche
 
 - **Timer Pomodoro**: Imposta un timer per 25 minuti di lavoro ininterrotto.
-- **Pause**: Dopo ogni sessione di lavoro, prendi una pausa di 5 minuti per ricaricare le energie.
-- **Statistiche**: Monitora il tuo progresso e visualizza le statistiche sulle sessioni di lavoro completate.
-- **Interfaccia semplice**: Facile da usare, con un design pulito e intuitivo.
+- **Pause**: Dopo ogni sessione di lavoro, prendi una pausa di 5 minuti.
+- **Cicli**: Completa un numero personalizzabile di cicli di lavoro e pause.
+- **Audio**: Notifiche sonore al termine di ogni sessione.
+- **Interfaccia Personalizzabile**: Scegli tra diverse durate di lavoro, pause e cicli.
+- **Tema scuro/chiaro**: Passa facilmente tra la modalità scura e chiara.
 
 ## Tecnologie utilizzate
 
-- HTML
-- CSS
-- JavaScript
+- Python
+- CustomTkinter (per l'interfaccia utente)
+- Pygame (per la gestione del suono)
 
 ## Installazione
 
-1. Clona il repository:
+Per eseguire myPomodoro, assicurati di avere Python installato sulla tua macchina. Puoi installare le dipendenze necessarie utilizzando `pip`.
+
+1. **Clona il repository**:
    ```bash
    git clone https://github.com/vitalelele/myPomodoro.git
    ```
 
-2. Naviga nella directory del progetto:
+2. **Naviga nella directory del progetto**:
    ```bash
    cd myPomodoro
    ```
 
-3. Apri il file `index.html` nel tuo browser per avviare l'app.
+3. **Installa le dipendenze**:
+   ```bash
+   pip install customtkinter pygame
+   ```
+
+4. **Assicurati di avere il file audio**: 
+   Scarica un file audio di notifica (es. `bell_sound.mp3`) e posizionalo nella stessa directory del file `pomodoro.py`.
+
+5. **Esegui l'app**:
+   ```bash
+   python pomodoro.py
+   ```
 
 ## Utilizzo
 
-1. Imposta il timer per la sessione di lavoro.
-2. Clicca su "Avvia" per iniziare.
-3. Una volta terminato il timer, prendi una pausa e ripeti il processo.
-4. Controlla le statistiche per monitorare il tuo progresso.
-
+1. Avvia l'app e imposta il timer per la sessione di lavoro.
+2. Clicca su "Avvia" per iniziare il timer.
+3. Dopo ogni sessione di lavoro, una finestra di messaggio ti notificherà di prendere una pausa.
+4. Personalizza le impostazioni attraverso il pulsante delle impostazioni per modificare la durata delle sessioni di lavoro e pause, e il numero di cicli.
+   
 ## Contribuire
 
 Se desideri contribuire a myPomodoro, segui questi passi:
@@ -61,6 +76,4 @@ Se desideri contribuire a myPomodoro, segui questi passi:
 
 ## Licenza
 
-Questo progetto è sotto la licenza MIT. Vedi il file [LICENSE](LICENSE) per maggiori dettagli.
-
-Grazie per aver scelto myPomodoro! Buon lavoro!
+Questo progetto è sotto la licenza MIT.
