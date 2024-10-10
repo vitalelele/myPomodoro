@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: white;
+        }
+        .circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid lightblue;
+            position: relative;
+            margin: auto;
+        }
+        .timer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Pomodoro Timer</h1>
+        <div id="timer" class="circle">
+            <div id="time" class="timer">25:00</div>
+        </div>
+        <div class="text-center mt-4">
+            <button id="start" class="btn btn-success">Start</button>
+            <button id="stop" class="btn btn-danger" disabled>Stop</button>
+            <button id="reset" class="btn btn-warning">Reset</button>
+            <button id="report" class="btn btn-info">Show Report</button>
+        </div>
+        <div class="mt-4">
+            <h3>Settings</h3>
+            <form id="settings-form">
+                <div class="form-group">
+                    <label>Pomodoro Duration (minutes):</label>
+                    <input type="number" class="form-control" name="pomodoro_duration" value="{{ settings['pomodoro_duration'] }}">
+                </div>
+                <div class="form-group">
+                    <label>Break Duration (minutes):</label>
+                    <input type="number" class="form-control" name="break_duration" value="{{ settings['break_duration'] }}">
+                </div>
+                <div class="form-group">
+                    <label>Number of Cycles:</label>
+                    <input type="number" class="form-control" name="cycles" value="{{ settings['cycles'] }}">
+                </div>
+                <div class="form-group">
+                    <label>Theme:</label>
+                    <select class="form-control" name="theme">
+                        <option value="dark" {% if settings['theme'] == 'dark' %}selected{% endif %}>Dark</option>
+                        <option value="light" {% if settings['theme'] == 'light' %}selected{% endif %}>Light</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Settings</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+        let timer;
+        let timeLeft = {{ settings['pomodoro_duration'] }} * 60;
+
+        $('#start').click(function() {
+            $(this).prop('disabled', true);
+            $('#stop').prop('disabled', false);
+            startTimer();
+        });
+
+        $('#stop').click(function() {
+            $(this).prop('disabled', true);
+            $('#start').prop('disabled', false);
+            clearInterval(timer);
+        });
+
+        $('#reset').click(function() {
+            clearInterval(timer);
+            timeLeft = {{ settings['pomodoro_duration'] }} * 60;
+            $('#time').text(formatTime(timeLeft));
+            $('#start').prop('disabled', false);
+            $('#stop').prop('disabled', true);
+        });
+
+        $('#settings-form').on('submit', function(e) {
+            e.preventDefault();
+            $.post('/update_settings', $(this).serialize(), function(response) {
+                alert(response.message);
+            });
+        });
+
+        $('#report').click(function() {
+            $.get('/report', function(data) {
+                alert(`Sessions Completed: ${data.sessions_completed}\nTotal Work Time: ${data.total_work_time}\nTotal Break Time: ${data.total_break_time}`);
+            });
+        });
+
+        function startTimer() {
+            timer = setInterval(function() {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    $('#time').text(formatTime(timeLeft));
+                } else {
+                    clearInterval(timer);
+                    alert("Time's up!");
+                    $('#stop').prop('disabled', true);
+                    $('#start').prop('disabled', false);
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
