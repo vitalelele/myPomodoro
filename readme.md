@@ -1,4 +1,3 @@
-
 ```markdown
 # myPomodoro
 
@@ -65,15 +64,8 @@ Se desideri contribuire a myPomodoro, segui questi passi:
 
 Questo progetto è sotto la licenza MIT. Vedi il file [LICENSE](LICENSE) per maggiori dettagli.
 
-## Contatti
-
-Per domande o feedback, puoi contattarmi a [tuo_email@example.com](mailto:tuo_email@example.com).
 
 ---
 
 Grazie per aver scelto myPomodoro! Buon lavoro!
 ```
-
-### Note:
-- Assicurati di aggiornare le informazioni di contatto e qualsiasi altra parte che possa necessitare di personalizzazione.
-- Se hai ulteriori dettagli o funzionalità specifiche che vuoi evidenziare, sentiti libero di aggiungerli!
