@@ -1,79 +1,79 @@
 # myPomodoro 🍅
 
-myPomodoro è un'applicazione desktop sviluppata in Python che utilizza la tecnica del Pomodoro per aiutarti a migliorare la tua produttività. Con un'interfaccia utente semplice e intuitiva, puoi gestire facilmente le tue sessioni di lavoro e le pause.
+myPomodoro is a desktop application developed in Python that uses the Pomodoro technique to help you improve your productivity. With a simple and intuitive user interface, you can easily manage your work sessions and breaks.
 
-## Caratteristiche
+## Features
 
-- **Timer Pomodoro**: Imposta un timer per 25 minuti di lavoro ininterrotto.
-- **Pause**: Dopo ogni sessione di lavoro, prendi una pausa di 5 minuti.
-- **Cicli**: Completa un numero personalizzabile di cicli di lavoro e pause.
-- **Audio**: Notifiche sonore al termine di ogni sessione.
-- **Interfaccia Personalizzabile**: Scegli tra diverse durate di lavoro, pause e cicli.
-- **Tema scuro/chiaro**: Passa facilmente tra la modalità scura e chiara.
+- **Pomodoro Timer**: Set a timer for 25 minutes of uninterrupted work.
+- **Breaks**: After each work session, take a 5-minute break.
+- **Cycles**: Complete a customizable number of work and break cycles.
+- **Audio**: Sound notifications at the end of each session.
+- **Customizable Interface**: Choose different durations for work, breaks, and cycles.
+- **Dark/Light Theme**: Easily switch between dark and light modes.
 
-## Tecnologie utilizzate
+## Technologies Used
 
 - Python
-- CustomTkinter (per l'interfaccia utente)
-- Pygame (per la gestione del suono)
+- CustomTkinter (for the user interface)
+- Pygame (for sound management)
 
-## Installazione
+## Installation
 
-Per eseguire myPomodoro, assicurati di avere Python installato sulla tua macchina. Puoi installare le dipendenze necessarie utilizzando `pip`.
+To run myPomodoro, make sure you have Python installed on your machine. You can install the necessary dependencies using `pip`.
 
-1. **Clona il repository**:
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/vitalelele/myPomodoro.git
    ```
 
-2. **Naviga nella directory del progetto**:
+2. **Navigate to the project directory**:
    ```bash
    cd myPomodoro
    ```
 
-3. **Installa le dipendenze**:
+3. **Install the dependencies**:
    ```bash
    pip install customtkinter pygame
    ```
 
-4. **Assicurati di avere il file audio**: 
-   Scarica un file audio di notifica (es. `bell_sound.mp3`) e posizionalo nella stessa directory del file `pomodoro.py`.
+4. **Make sure to have the audio file**: 
+   Download a notification sound file (e.g., `bell_sound.mp3`) and place it in the same directory as the `pomodoro.py` file.
 
-5. **Esegui l'app**:
+5. **Run the app**:
    ```bash
    python pomodoro.py
    ```
 
-## Utilizzo
+## Usage
 
-1. Avvia l'app e imposta il timer per la sessione di lavoro.
-2. Clicca su "Avvia" per iniziare il timer.
-3. Dopo ogni sessione di lavoro, una finestra di messaggio ti notificherà di prendere una pausa.
-4. Personalizza le impostazioni attraverso il pulsante delle impostazioni per modificare la durata delle sessioni di lavoro e pause, e il numero di cicli.
+1. Launch the app and set the timer for the work session.
+2. Click on "Start" to begin the timer.
+3. After each work session, a message window will notify you to take a break.
+4. Customize the settings through the settings button to change the durations of work sessions and breaks, as well as the number of cycles.
    
-## Contribuire
+## Contributing
 
-Se desideri contribuire a myPomodoro, segui questi passi:
+If you wish to contribute to myPomodoro, please follow these steps:
 
-1. Fai un fork del progetto.
-2. Crea un nuovo branch per la tua feature:
+1. Fork the project.
+2. Create a new branch for your feature:
    ```bash
    git checkout -b my-feature
    ```
-3. Apporta le tue modifiche e aggiungi i file modificati:
+3. Make your changes and add the modified files:
    ```bash
    git add .
    ```
-4. Fai un commit delle tue modifiche:
+4. Commit your changes:
    ```bash
-   git commit -m "Aggiunta di una nuova feature"
+   git commit -m "Added a new feature"
    ```
-5. Fai il push delle tue modifiche:
+5. Push your changes:
    ```bash
    git push origin my-feature
    ```
-6. Crea una nuova Pull Request.
+6. Create a new Pull Request.
 
-## Licenza
+## License
 
-Questo progetto è sotto la licenza MIT.
+This project is licensed under the MIT License.
