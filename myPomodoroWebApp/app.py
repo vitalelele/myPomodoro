@@ -38,7 +38,7 @@ def index():
 
 @app.route('/start_timer', methods=['POST'])
 def start_timer():
-    # Logic for starting the timer (for now, just return a message)
+    global work_sessions_completed, total_work_time, total_break_time
     return jsonify({"message": "Timer started!", "settings": settings})
 
 @app.route('/update_settings', methods=['POST'])
@@ -49,7 +49,7 @@ def update_settings():
     settings["cycles"] = int(request.form['cycles'])
     settings["theme"] = request.form['theme']
     save_settings()
-    return jsonify({"message": "Settings updated!"})
+    return jsonify({"message": "Settings updated!", "settings": settings})
 
 @app.route('/report')
 def report():
